@@ -1,0 +1,559 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="cache-control" content="max-age=604800" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>TechZone | Html Bootstrap4 Ecommerce Template</title>
+
+   <!--Site Icon-->
+        <link th:href="@{/client/images/}" rel="shortcut icon" type="image/x-icon">
+
+    <!-- Bootstrap4 files-->
+    <link th:href="@{/client/css/bootstrap.css}" rel="stylesheet" type="text/css" />
+
+    <!-- Font Awesome 5 -->
+    <link th:href="@{/client/fonts/fontawesome/css/all.min.css}" type="text/css" rel="stylesheet">
+
+    <!-- Owl Caropusel -->
+    <link th:href="@{/client/css/owl.carousel.min.css}" rel="stylesheet" type="text/css" />
+    
+    <!-- Slick Caropusel -->
+    <link th:href="@{/client/css/slick.css}" rel="stylesheet" type="text/css" />
+    
+    <!-- Slick Caropusel Theme -->
+    <link th:href="@{/client/css/slick-theme.css}" rel="stylesheet" type="text/css" />
+    
+    <link th:href="@{/client/css/magnific-popup.css}" rel="stylesheet" type="text/css" />
+
+    <!-- UI Style -->
+    <link th:href="@{/client/css/ui.css}" rel="stylesheet" type="text/css" />
+
+    <!-- style.css -->
+    <link th:href="@{/client/css/style.css}" rel="stylesheet" type="text/css" />
+
+    <!-- responsive.css -->
+    <link th:href="@{/client/css/responsive.css}" rel="stylesheet" media="only screen and (max-width: 1200px)" />
+</head>
+
+<body class="checkout-page">
+
+
+    <!-- ========================= Header start ========================= -->
+    <header class="section-header">
+        <nav class="tz-header-top navbar p-md-0 navbar-expand-lg navbar-light">
+            <div class="container">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTop3" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarTop3">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"> <i class="fa fa-phone"></i> Call us: 01900220033 </a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"> USD </a>
+                            <ul class="dropdown-menu small">
+                                <li><a class="dropdown-item" href="#">EUR</a></li>
+                                <li><a class="dropdown-item" href="#">AED</a></li>
+                                <li><a class="dropdown-item" href="#">RUBL </a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"> Language </a>
+                            <ul class="dropdown-menu small">
+                                <li><a class="dropdown-item" href="#">English</a></li>
+                                <li><a class="dropdown-item" href="#">Arabic</a></li>
+                                <li><a class="dropdown-item" href="#">Russian </a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a href="#" class="nav-link"> My Account </a></li>
+                        <li class="nav-item"><a href="#" class="nav-link"> Wishlist </a></li>
+                        <li class="nav-item"><a href="#" class="nav-link"> Checkout </a></li>
+                    </ul> <!-- list-inline //  -->
+                </div> <!-- navbar-collapse .// -->
+            </div> <!-- container //  -->
+        </nav>
+        <section class="tz-header-middle header-main bg-light">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-3 col-6">
+                        <a href="index.html" class="brand-wrap">
+                            <img class="logo" th:src="@{/client/images/logo.png}">
+                        </a> <!-- brand-wrap.// -->
+                    </div>
+                    <div class="col-lg-6 col-sm-12 order-3 order-lg-2">
+                        <form action="#" class="search">
+                            <div class="input-group w-100">
+                                <select class="custom-select" name="category_name">
+                                    <option value="">All type</option>
+                                    <option value="codex">Special</option>
+                                    <option value="comments">Only best</option>
+                                    <option value="content">Latest</option>
+                                </select>
+                                <input type="text" class="form-control" style="width:60%;" placeholder="Search">
+
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="submit">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form> <!-- search-wrap .end// -->
+                    </div> <!-- col.// -->
+                    <div class="col-lg-3 col-sm-6 col-6 order-2 order-lg-3">
+                        <div class="d-flex align-items-center justify-content-end mb-3 mb-lg-0">
+                            <div class="widget-header">
+                                <div>
+                                    <a href="#">Sign in</a>
+                                    <a href="#">Register</a>
+                                </div>
+                            </div>
+                            <a href="#" class="widget-header pl-3 ml-3">
+                                <div class="icon icon-sm rounded-circle bg-primary"><i class="fa fa-shopping-cart"></i></div>
+                                <span class="badge badge-pill badge-danger notify">04</span>
+                            </a>
+                        </div> <!-- widgets-wrap.// -->
+                    </div> <!-- col.// -->
+                </div> <!-- row.// -->
+            </div> <!-- container.// -->
+        </section> <!-- header-main .// -->
+        <nav class="tz-header-main navbar navbar-main navbar-expand-lg bg-primary">
+            <div class="container">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main_nav3" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="main_nav3">
+                    <ul class="navbar-nav navbar-center">
+                        <li class="nav-item">
+                            <a class="nav-link pl-0" href="index.html"> <strong>Home</strong></a>
+                        </li>
+<!--
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">New Arrivals</a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#">Foods and Drink</a>
+                                <a class="dropdown-item" href="#">Home interior</a>
+                            </div>
+                        </li>
+-->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="category-headphone.html" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">All Categories</a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="category-headphone.html">Headphone</a>
+                                <a class="dropdown-item" href="category-speaker.html">Speakers</a>
+                                <a class="dropdown-item" href="category-airpod.html">Airpod</a>
+                                <a class="dropdown-item" href="category-apple-watch.html">Apple Watch</a>
+                                <a class="dropdown-item" href="category-amazon-gadgets.html">Amazon Gadgets</a>
+                                <a class="dropdown-item" href="category-all-gadgets.html">All Gadgets</a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="about.html">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.html">Contact</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">More</a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="cart.html">Cart</a>
+                                <a class="dropdown-item" href="checkout.html">Checkout</a>
+                                <a class="dropdown-item" href="product-details.html">Product Details</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div> <!-- collapse .// -->
+            </div> <!-- container .// -->
+        </nav> <!-- navbar main end.// -->
+    </header> <!-- header-end -->
+    <!-- ========================= Header end ========================= -->
+
+    <section class="tz-checkout-area section-content padding-y-t">
+        <div class="container">
+            <header class="section-heading tz-section-header-center">
+                <h3 class="section-title">Check<span>out</span></h3>
+                <p>Discover our selection of the best products of the year</p>
+            </header>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="tz-breadcumb mb-5">
+                        <h2 class="title-page">TechZone-Headphone</h2>
+                        <nav>
+                            <ol class="breadcrumb text-white">
+                                <li class="breadcrumb-item active" aria-current="page">Information</li>
+                                <li class="breadcrumb-item">
+                                    <a href="#">Shipping</a>
+                                </li>
+                                <li class="breadcrumb-item"><a href="#">Payment</a></li>
+                            </ol>
+                        </nav>
+                    </div>  
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-8">                    
+                    <div class="tz-contact-information form-group mb-5">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <span class="text-left">Contatct Information</span>
+                            </div> <!-- form-group end.// -->
+                            <div class="form-group col-md-6 text-right">
+                                <span class="text-left">Already have an account?
+                                    <a href="">Log in</a>
+                                </span>
+                            </div> <!-- form-group end.// -->
+                        </div> <!-- form-row.// -->
+                        <input type="email" class="form-control mb-4" placeholder="Email or phone number">
+                        <label class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="customCheck1">
+                            <div class="custom-control-label" for="customCheck1">Keep me up to date on news and exclusive offers</div>
+                        </label>
+                    </div>
+                    
+                    <div class="tz-shipping-information">
+                        <header class="mb-4">
+                            <h4 class="card-title">Shipping Address</h4>
+                        </header>
+                        <form th:action="@{/member/order}" method="post">
+                            <div class="form-row">
+                                
+                                
+                            </div> <!-- form-row end.// -->
+                        
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="address" placeholder="Address">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="phoneNumber" placeholder="Phone">
+                            </div>
+                           
+                            
+                                                    
+                            <label class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                <div class="custom-control-label" for="customCheck1">Save this information for next time</div>
+                            </label>
+
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary btn-lg"> Order</button>
+                            </div> <!-- form-group// -->
+                        </form>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="tz-shopping-total card">
+                        <div class="card-body">
+                            <dl class="dlist-align align-items-end tz-shopping-items">
+                                <dt class="d-flex align-items-center">
+                                    <div class="checkout-product-image-wrap">
+                                        <img src="images/checkout/checkout-headphone.png" alt="">    
+                                    </div>
+                                    <div>
+                                        <h5>Camera Canon EOS</h5>
+                                        <p>Matrix: 25 Mpx</p>
+                                        <p>Brand: Canon</p>
+                                    </div>
+                                </dt>
+                                <dd class="text-right">$568</dd>
+                            </dl>
+                            <dl class="dlist-align">
+                                <dt>Total price:</dt>
+                                <dd class="text-right" th:text="${session.sum}"></dd>
+                            </dl>
+                            <dl class="dlist-align">
+                                <dt>Discount:</dt>
+                                <dd class="text-right text-danger">0</dd>
+                            </dl>
+                            <hr>
+                            <dl class="dlist-align text-primary">
+                                <dt>Total:</dt>
+                                <dd class="text-right"><strong th:text="${session.sum}"></strong></dd>
+                            </dl>
+                            
+                        </div> <!-- card-body.// -->
+                    </div>
+                </div>
+            </div>
+        </div> <!-- container .//  -->
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+    
+
+
+
+
+
+    <section class="tz-feature-area section-content padding-y">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <article class="tz-feature card card-body">
+                        <figure class="text-center">
+                            <span class="rounded-circle icon-md bg-primary"><i class="fa fa-user white"></i></span>
+                            <figcaption class="pt-4">
+                                <h5 class="title">Creative Strategy &amp; solution</h5>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod </p>
+                            </figcaption>
+                        </figure> <!-- iconbox // -->
+                    </article> <!-- panel-lg.// -->
+                </div><!-- col // -->
+                <div class="col-md-4">
+                    <article class="tz-feature card card-body">
+                        <figure class="text-center">
+                            <span class="rounded-circle icon-md bg-primary"><i class="fa fa-truck white"></i></span>
+                            <figcaption class="pt-4">
+                                <h5 class="title">Creative Strategy &amp; solution</h5>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod </p>
+                            </figcaption>
+                        </figure> <!-- iconbox // -->
+                    </article> <!-- panel-lg.// -->
+                </div> <!-- col // -->
+                <div class="col-md-4">
+                    <article class="tz-feature card card-body">
+                        <figure class="text-center">
+                            <span class="rounded-circle icon-md bg-primary"><i class="fa fa-star white"></i></span>
+                            <figcaption class="pt-4">
+                                <h5 class="title">Creative Strategy &amp; solution</h5>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod </p>
+                            </figcaption>
+                        </figure> <!-- iconbox // -->
+                    </article> <!-- panel-lg.// -->
+                </div> <!-- col // -->
+            </div>
+        </div>
+    </section>
+
+
+    <section class="tz-brand-area section-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="tz-brand-wrap">
+                        <header class="section-heading tz-section-header-center">
+                            <h3 class="section-title">Brands <span>We Distribute</span></h3>
+                        </header><!-- sect-heading -->
+
+                        <div class="tz-brand-carousel owl-carousel">
+                            <div class="single-brand">
+                                <img src="images/brand/brand-1.png" alt="">
+                            </div>
+                            <div class="single-brand">
+                                <img src="images/brand/brand-5.png" alt="">
+                            </div>
+                            <div class="single-brand">
+                                <img src="images/brand/brand-2.png" alt="">
+                            </div>
+                            <div class="single-brand">
+                                <img src="images/brand/brand-4.png" alt="">
+                            </div>
+                            <div class="single-brand">
+                                <img src="images/brand/brand-5.png" alt="">
+                            </div>
+                            <div class="single-brand">
+                                <img src="images/brand/brand-1.png" alt="">
+                            </div>
+                            <div class="single-brand">
+                                <img src="images/brand/brand-2.png" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <section class="tz-subscription-area section-content padding-y">
+        <div class="container">
+            <header class="section-heading tz-section-header-center">
+                <h3 class="section-title">Get Discount <br>And <span>Product Updates</span></h3>
+            </header><!-- sect-heading -->
+            <div class="row justify-content-md-center">
+                <div class="col-lg-5 col-md-6">
+                    <form class="form-row">
+                        <div class="col-md-8 col-7">
+                            <input class="form-control" placeholder="Email" type="email">
+                        </div> <!-- col.// -->
+                        <div class="col-md-4 col-5">
+                            <button type="submit" class="btn btn-block btn-primary btn-lg"> Subscribe </button>
+                        </div> <!-- col.// -->
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+
+
+
+
+    <!-- ========================= FOOTER ========================= -->
+    <footer class="section-footer border-top bg-primary">
+        <div class="container">
+            <section class="footer-top padding-y">
+                <div class="row">
+                    <aside class="col-md-5">
+                        <article class="mr-3">
+                            <img th:src="@{/client/images/footer/footer-logo.png}" class="logo-footer">
+                            <p class="mt-3">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
+                            <div class="d-flex">
+                                <div class="footer-social">
+                                    <h5>Follow Us</h5>
+                                    <a class="" title="Facebook" target="_blank" href="#"><i class="fab fa-facebook-f"></i></a>
+                                    <a class="" title="Instagram" target="_blank" href="#"><i class="fab fa-instagram"></i></a>
+                                    <a class="" title="Youtube" target="_blank" href="#"><i class="fab fa-youtube"></i></a>
+                                    <a class="" title="Twitter" target="_blank" href="#"><i class="fab fa-twitter"></i></a>
+                                </div>
+                                <div class="footer-payment-gateway">
+                                    <h5>We Receive</h5>
+                                    <a class="" target="_blank" href="#"><img th:src="@{/client/images/payment/paypal.png}"></a>
+                                    <a class="" target="_blank" href="#"><img th:src="@{/client/images/payment/mastercard.png}"></a>
+                                    <a class="" target="_blank" href="#"><img th:src="@{/client/images/payment/visa.png}"></a>
+                                </div>
+                            </div>
+                        </article>
+                    </aside>
+                    <aside class="col-md-7">
+                        <div class="row">
+                            <aside class="col-sm-4 col-md-4">
+                                <!-- <h6 class="title">Services</h6> -->
+                                <ul class="list-unstyled">
+                                    <li> <a href="#"> Home </a></li>
+                                    <li> <a href="#"> New Arrivals </a></li>
+                                    <li> <a href="#"> All Products </a></li>
+                                    <li> <a href="#"> About </a></li>
+                                    <li> <a href="#"> Contact </a></li>
+                                    <li> <a href="#"> Our Policy </a></li>
+                                </ul>
+                            </aside>
+                            <aside class="col-sm-4 col-md-5">
+                                <!-- <h6 class="title">Services</h6> -->
+                                <ul class="list-unstyled">
+                                    <li> <a href="#"> Headphone </a></li>
+                                    <li> <a href="#"> Speaker </a></li>
+                                    <li> <a href="#"> All Gadgets </a></li>
+                                    <li> <a href="#"> Apple Watch Accessories </a></li>
+                                    <li> <a href="#"> Amazon Alexa Gadgets </a></li>
+                                    <li> <a href="#"> AirPods Accessories </a></li>
+                                </ul>
+                            </aside>
+                            <aside class="col-sm-4  col-md-3">
+                                <!-- <h6 class="title">For users</h6> -->
+                                <ul class="list-unstyled">
+                                    <li> <a href="#"> Support </a></li>
+                                    <li> <a href="#"> User Login </a></li>
+                                    <li> <a href="#"> User register </a></li>
+                                    <li> <a href="#"> Account Setting </a></li>
+                                    <li> <a href="#"> My Orders </a></li>
+                                    <li> <a href="#"> My Wishlist </a></li>
+                                </ul>
+                            </aside>
+                        </div>
+                    </aside>
+                </div> <!-- row.// -->
+            </section> <!-- footer-top.// -->
+        </div><!-- //container -->
+        <section class="footer-copyright border-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-7">
+                        <p>Made with <span><img th:src="@{/client/images/footer/heart.png}" alt=""></span>love by <a href="#">CuDau</a></p>           
+                    </div>
+                    <div class="col-md-5 text-right">
+                        <p>All Right Reserved</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </footer>
+    <!-- ========================= FOOTER END // ========================= -->
+
+
+    <!-- jQuery -->
+     <script th:src="@{/client/js/jquery-2.0.0.min.js}" type="text/javascript"></script>
+    <script th:src="@{/client/js/bootstrap.bundle.min.js}" type="text/javascript"></script>
+    <script th:src="@{/client/js/owl.carousel.min.js}" type="text/javascript"></script>
+    <script th:src="@{/client/js/slick.min.js}" type="text/javascript"></script>
+    
+
+    <!-- custom javascript -->
+    <script th:src="@{/client/js/script.js}" type="text/javascript"></script>
+    <script type="text/javascript">
+        /// some script
+
+        // jquery ready start
+        $(document).ready(function() {
+            // jQuery code
+
+        });
+        // jquery end
+    </script>
+
+</body>
+
+</html>

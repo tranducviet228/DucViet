@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+
+	<form th:action="@{/admin/category/update}" method="post"
+		th:modelattribute="${category}">
+
+		<div>
+			<label>ID</label> <input type="text" th:value="${c.id}" name='id'/>
+		</div>
+		<div>
+			<label> Name :</label> <input type="text" th:value="${c.name}" name="name"/>
+		</div>
+		<button type="submit" value="update ">OK</button>
+
+
+	</form>
+</body>
+</html>

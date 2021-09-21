@@ -1,0 +1,154 @@
+
+  
+<!DOCTYPE html>
+<html >
+<head>
+<meta charset="UTF-8" />
+<title></title>
+</head>
+<body >
+	<br><br><br><br><br>
+	
+	<h1>Danh Sach Bill</h1>
+	
+	<table border="1px solid black">
+		<tr>
+			<th>ID</th>
+			<th>NAME</th>
+			<th>ADDRESS</th>
+			<th>PHONE</th>
+			<th>BUYDATE</th>
+			
+			<th>DISCOUNT</th>
+			<th>PRICETOTAL</th>
+			<th>PAY</th>
+			<th>OPTION</th>
+		</tr>
+
+		<tr th:each="b:${listB }">
+			<td th:text="${b.id }"></td>
+			<td th:text="${b.user.username}"></td>
+			<td th:text="${b.address}"></td>
+		    <td th:text="${b.phoneNumber}"></td>
+			<td th:text="${b.buyDate }"></td>
+					
+			<td th:text="${b.discountPercent}+'%'"></td>
+			<td th:text="${b.priceTotal }"></td>
+			<td th:text="${b.pay }"></td>		
+			<td><a th:href="@{'/member/bill?billId='+${b.id }}">detail</a>|<a th:href="@{'/member/delete/bills?billId='+${b.id }}">DELETE</a></td>
+		</tr>
+
+	</table>
+	<div>
+		<a class="btn btn-primary" th:if="${admin}==null"
+			th:href="@{'/member/bills?keyword=' + ${keyword} +'&page=' + ${page + 1}}">LOAD
+			MORE</a> <a class="btn btn-primary" th:if="${admin}!=null"
+			th:href="@{'/admin/bill/search?keyword=' + ${keyword} +'&page=' + ${page + 1}}">LOAD
+			MORE</a>
+	</div>
+	<br><br><br><br><br>
+	<script th:src="@{/js/main.js}" type="text/javascript"></script>
+<!--===============================================================================================-->	
+	<script th:src="@{/vendor/jquery/jquery-3.2.1.min.js}"></script>
+<!--===============================================================================================-->
+	<script th:src="@{/vendor/animsition/js/animsition.min.js}"></script>
+<!--===============================================================================================-->
+	<script th:src="@{/vendor/bootstrap/js/popper.js}"></script>
+	<script th:src="@{/vendor/bootstrap/js/bootstrap.min.js}"></script>
+<!--===============================================================================================-->
+	<script th:src="@{/vendor/select2/select2.min.js}"></script>
+	<script>
+		$(".js-select2").each(function(){
+			$(this).select2({
+				minimumResultsForSearch: 20,
+				dropdownParent: $(this).next('.dropDownSelect2')
+			});
+		})
+	</script>
+<!--===============================================================================================-->
+	<script th:src="@{/vendor/daterangepicker/moment.min.js}"></script>
+	<script th:src="@{/vendor/daterangepicker/daterangepicker.js}"></script>
+<!--===============================================================================================-->
+	<script th:src="@{/vendor/slick/slick.min.js}"></script>
+	<script th:src="@{/js/slick-custom.js}"></script>
+<!--===============================================================================================-->
+	<script th:src="@{/vendor/parallax100/parallax100.js}"></script>
+	<script>
+        $('.parallax100').parallax100();
+	</script>
+<!--===============================================================================================-->
+	<script src="vendor/MagnificPopup/jquery.magnific-popup.min.js}"></script>
+	<script>
+		$('.gallery-lb').each(function() { // the containers for all your galleries
+			$(this).magnificPopup({
+		        delegate: 'a', // the selector for gallery item
+		        type: 'image',
+		        gallery: {
+		        	enabled:true
+		        },
+		        mainClass: 'mfp-fade'
+		    });
+		});
+	</script>
+<!--===============================================================================================-->
+	<script th:src="@{/vendor/isotope/isotope.pkgd.min.js}"></script>
+<!--===============================================================================================-->
+	<script th:src="@{/vendor/sweetalert/sweetalert.min.js}"></script>
+	<script>
+		$('.js-addwish-b2').on('click', function(e){
+			e.preventDefault();
+		});
+
+		$('.js-addwish-b2').each(function(){
+			var nameProduct = $(this).parent().parent().find('.js-name-b2').html();
+			$(this).on('click', function(){
+				swal(nameProduct, "is added to wishlist !", "success");
+
+				$(this).addClass('js-addedwish-b2');
+				$(this).off('click');
+			});
+		});
+
+		$('.js-addwish-detail').each(function(){
+			var nameProduct = $(this).parent().parent().parent().find('.js-name-detail').html();
+
+			$(this).on('click', function(){
+				swal(nameProduct, "is added to wishlist !", "success");
+
+				$(this).addClass('js-addedwish-detail');
+				$(this).off('click');
+			});
+		});
+
+		/*---------------------------------------------*/
+
+		$('.js-addcart-detail').each(function(){
+			var nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').html();
+			$(this).on('click', function(){
+				swal(nameProduct, "is added to cart !", "success");
+			});
+		});
+	
+	</script>
+<!--===============================================================================================-->
+	<script th:src="@{/vendor/perfect-scrollbar/perfect-scrollbar.min.js}"></script>
+	<script>
+		$('.js-pscroll').each(function(){
+			$(this).css('position','relative');
+			$(this).css('overflow','hidden');
+			var ps = new PerfectScrollbar(this, {
+				wheelSpeed: 1,
+				scrollingThreshold: 1000,
+				wheelPropagation: false,
+			});
+
+			$(window).on('resize', function(){
+				ps.update();
+			})
+		});
+	</script>
+<!--===============================================================================================-->
+	<script src="js/main.js"></script>
+	
+</body>
+</html>

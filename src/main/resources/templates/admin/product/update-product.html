@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html >
+<head>
+<meta charset="UTF-8">
+<title>update product</title>
+
+</head>
+<body >
+
+	<div>
+		<form th:action="@{/admin/product/update}" th:modelattribute="${product}"
+			method="post" enctype="multipart/form-data">
+
+			<p>Update Product</p>
+			<div>
+				<label>Id</label> <input type="text"  th:value="${product.id}" name="id"/>
+			</div>
+			<div>
+				<label>Name</label> <input type="text"  th:value="${product.name}" name="name" />
+			</div>
+			<div>
+				<label>Price</label> <input type="text"  th:value="${product.price}" name="price"/>
+			</div>
+			<div>
+				<label>Description</label>
+				<textarea rows="" cols=""  th:value="${product.description}" name="description" ></textarea>
+			</div>
+			<div>
+				<label>So Luong</label> <input type="text"  th:value="${product.amount}" name="amount" />
+			</div>
+	
+			<div>
+				<label>Category</label> <select th:value="${product.categoryDto}" name="category">
+					<option th:each="Cate: ${listCategory}" th:value="${Cate.id}"
+						th:text="${Cate.name}"></option>
+				</select>
+			</div>
+		
+			<div>
+				<label>Image</label> <input type="file" name="imageFile" th:value="${product.image}"
+					accept="image/*" />
+			</div>
+
+			<div>
+				<button type="submit">Update</button>
+			</div>
+		</form>
+	</div>
+</body>
+</html>
