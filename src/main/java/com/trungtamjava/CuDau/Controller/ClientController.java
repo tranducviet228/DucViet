@@ -175,7 +175,8 @@ public class ClientController {
    	 return "redirect:/login";
     }
     @GetMapping(value = "/logout")
-    public String logout() {
+    public String logout(HttpServletRequest request, HttpSession session ){
+    	request.getSession().invalidate();
 		return "/login"
 				;
    	 

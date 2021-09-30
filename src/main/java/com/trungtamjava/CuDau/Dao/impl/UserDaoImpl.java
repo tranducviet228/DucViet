@@ -57,4 +57,10 @@ public class UserDaoImpl implements UserDao{
 		return query.getResultList();
 	}
 
+	@Override
+	public List<UserEntity> getAll() {
+		String hql =" select u from UserEntity u ";
+		return entityManager.createQuery(hql, UserEntity.class).getResultList();
+	}
+
 }

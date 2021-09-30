@@ -22,4 +22,5 @@ public interface UserService {
 	
 	List<UserDto> search(String findName, int start, int length);
 	
+	List<UserDto> getAll();
 }

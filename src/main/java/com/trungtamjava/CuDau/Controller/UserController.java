@@ -21,16 +21,12 @@ public class UserController {
 	
 
 	@GetMapping(value = "/admin/user/search")
-	public String searchUser(HttpServletRequest request,
-			@RequestParam(value = "keyword", required = false) String keyword,
-			@RequestParam(value = "page", required = false) Integer page) {
-		page = page == null ? 1 : page;
-		keyword = keyword == null ? "" : keyword;
+	public String searchUser(HttpServletRequest request) {
+		
 		// mac dinh 10 ban ghi 1 trang
-		List<UserDto> userList = userService.search(keyword, 0, page * 10);
+		List<UserDto> userList = userService.getAll();
 		request.setAttribute("userList", userList);
-		request.setAttribute("page", page);
-		request.setAttribute("keyword", keyword);
+		
 		return "admin/user/view-user";
 	}
 

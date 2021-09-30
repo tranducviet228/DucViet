@@ -20,5 +20,7 @@ public interface UserDao {
 
 	List<UserEntity> search(String findName, int start, int length);
 	
+	List<UserEntity> getAll();
+	
 	
 }

@@ -136,4 +136,26 @@ public class UserServiceImpl implements UserService {
 		return userDTOs;
 	}
 
+	@Override
+	public List<UserDto> getAll() {
+		List<UserEntity> list= userDao.getAll();
+		List<UserDto> list2= new ArrayList<UserDto>();
+				for (UserEntity user : list) {
+					UserDto userDTO = new UserDto();
+					userDTO.setId(user.getId());
+					userDTO.setName(user.getName());
+					userDTO.setAge(user.getAge());
+					userDTO.setRole(user.getRole());
+					userDTO.setUsername(user.getUsername());
+					userDTO.setGender(user.getGender());
+					userDTO.setAddress(user.getAddress());
+					userDTO.setPassword(user.getPassword());
+					userDTO.setPhone(user.getPhone());
+					userDTO.setEmail(user.getEmail());
+					list2.add(userDTO);
+				}
+				return list2;
+		
+	}
+
 }
