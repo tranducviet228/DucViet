@@ -12,17 +12,21 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.event.PublicInvocationEvent;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.trungtamjava.CuDau.Dto.CategoryDto;
 import com.trungtamjava.CuDau.Dto.ProductBillDto;
 import com.trungtamjava.CuDau.Dto.ProductDto;
 import com.trungtamjava.CuDau.Dto.UserDto;
+import com.trungtamjava.CuDau.Dto.UserPrincipal;
 import com.trungtamjava.CuDau.Service.CategoryService;
 import com.trungtamjava.CuDau.Service.ProductBillService;
 import com.trungtamjava.CuDau.Service.ProductService;
@@ -177,12 +181,11 @@ public class ClientController {
     @GetMapping(value = "/logout")
     public String logout(HttpServletRequest request, HttpSession session ){
     	request.getSession().invalidate();
-		return "/login"
-				;
+		return "/login";
    	 
     }
     @GetMapping("/login")
-    public String hello() {
+    public String hello() { 
     	return"login";
     }
 
@@ -191,6 +194,18 @@ public class ClientController {
 	@GetMapping("/access-deny")
 	public String accessDeny(HttpServletRequest req) {
 		return "access-deny";
+	}
+	
+	@RequestMapping("/home")
+	public String home(Model model) {
+		UserPrincipal userPrincipal= (UserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if (userPrincipal.getRole().equals("ROLE_ADMIN")) {
+			return "/dashboard";
+			
+		}
+			return"redirect:/index";
+		
+		
 	}
 	@GetMapping("/admin/dashboard")
 	public String dashBoard(HttpServletRequest request) {

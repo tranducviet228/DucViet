@@ -1,5 +1,7 @@
 package com.trungtamjava.CuDau;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.context.annotation.Configuration;
@@ -29,7 +31,6 @@ public class MySpringSecurity extends WebSecurityConfigurerAdapter{
 	}
 	
 	//cau hinh phan quyen
-	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		//phan quyen
 		http.csrf().disable().authorizeRequests()
@@ -39,10 +40,11 @@ public class MySpringSecurity extends WebSecurityConfigurerAdapter{
 		.anyRequest().permitAll()
 		//cauhinh giao dien
 		.and()
-		.formLogin().loginPage("/login")
+		.formLogin()
+		.loginPage("/login")
 		.loginProcessingUrl("/login")
 		.usernameParameter("username")
-		.defaultSuccessUrl("/index", true)
+		.defaultSuccessUrl("/home", true)
 		.failureUrl("/login")
 		.and()
 		.logout()
@@ -50,6 +52,7 @@ public class MySpringSecurity extends WebSecurityConfigurerAdapter{
 		.logoutSuccessUrl("/login")
 		//khi ng dung truy cap trai phep
 		.and().exceptionHandling().accessDeniedPage("/access-deny");
+		
 		
 	}
 	public static void main(String[] args) {
