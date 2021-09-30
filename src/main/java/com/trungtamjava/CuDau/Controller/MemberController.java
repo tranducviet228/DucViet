@@ -57,7 +57,7 @@ public class MemberController {
 
 
 	@PostMapping(value = "/member/order")
-	public String addBill( HttpSession session) {
+	public String addBill(@ModelAttribute BillDto billDto, HttpSession session) {
 		UserPrincipal userPrincipal = (UserPrincipal) SecurityContextHolder.getContext().getAuthentication()
 				.getPrincipal();
 		UserDto userDto = new UserDto();
@@ -66,7 +66,7 @@ public class MemberController {
 		Long totalPrice = 0L;
 		Object object = session.getAttribute("cart");
 		if (object != null) {
-			BillDto billDto= new BillDto();
+			
 			billDto.setPriceTotal(0L);
 			billDto.setUser(userDto);
 			billDto.setStatus("NEW");
@@ -110,5 +110,15 @@ public class MemberController {
 		return "member/bills";
 
 	}
-
+	
+	@GetMapping(value = "/member/delete")
+	public String delete(@RequestParam(value = "id") Long id) {
+		BillDto billDto= billService.get(id);
+		String status= billDto.getStatus();
+		String status2="NEW";
+		if (status.equals(status2)) {
+			billService.delete(billDto);
+		}
+		return"redirect:/member/lists";
+	}
 }

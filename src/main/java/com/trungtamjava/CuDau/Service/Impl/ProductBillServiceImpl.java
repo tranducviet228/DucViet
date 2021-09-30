@@ -37,17 +37,17 @@ public class ProductBillServiceImpl implements ProductBillService {
 		BillEntity billEntity = new BillEntity();
 		billEntity.setId(productBillDto.getBillDto().getId());
 		productBillEntity.setBill(billEntity);
+		ProductEntity productEntity = productDao.getProduct(productBillDto.getProductDto().getId());
 
-//		ProductEntity productEntity = productDao.getProduct(productBillDto.getProductDto().getId());
-		ProductEntity productEntity= new ProductEntity();
+		productEntity.setId(productBillDto.getProductDto().getId());
 		productBillEntity.setProduct(productEntity);
 
 		productBillDao.add(productBillEntity);
 
 		// tru so luon go day
 		// lay productentity tu db theo id ra, roi tru di update lai
-//		productEntity.setAmount(productEntity.getAmount() - productBillDto.getQuantity());
-//		productDao.update(productEntity);
+		productEntity.setAmount(productEntity.getAmount() - productBillDto.getQuantity());
+		productDao.update(productEntity);
 	}
 
 	@Override

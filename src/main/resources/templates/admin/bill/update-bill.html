@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html >
+<head>
+<meta charset="UTF-8">
+<title>update product</title>
+
+</head>
+<body >
+
+	<div>
+		<form th:action="@{/admin/bill/update}" th:modelattribute="${bill}"
+			method="post" enctype="multipart/form-data">
+
+			<p>Update Product</p>
+			<div>
+				<label>Id</label> <input type="text"  th:value="${bill.id}" name="id"/>
+			</div>
+			<div>
+				<label>Address</label> <input type="text"  th:value="${bill.address}" name="name" />
+			</div>
+			<div>
+				<label>BuyDate</label> <input type="text"  th:value="${bill.buyDate}" name="buyDate"/>
+			</div>
+		
+			<div>
+				<label>Sale</label> <input type="text"  th:value="${bill.discountPercent}" name="discountPercent" />
+			</div>
+			<div>
+				<label>Pay</label> <input type="text"  th:value="${bill.pay}" name="pay" />
+			</div>
+			<div>
+				<label>Phone</label> <input type="text"  th:value="${bill.phoneNumber}" name="phoneNumber" />
+			</div>
+			<div>
+				<label>Status</label> 
+				<select th:value="${bill.status}" name="status">
+					<option  value="Chờ xác nhận " > Chờ xác nhận</option>
+					<option  value="Đang xử lý " > Đang xử lí</option>
+					<option  value="Đang vận chuyển " > Đang vận chuyển</option>
+					<option  value="Hoàn thành "> Hoàn thành</option>
+				</select>
+			</div>
+			<div>
+				<label>PriceTotal</label> <input type="text"  th:value="${bill.priceTotal}" name="priceTotal" />
+			</div>
+	
+
+			<div>
+				<button type="submit">Update</button>
+			</div>
+		</form>
+	</div>
+</body>
+</html>

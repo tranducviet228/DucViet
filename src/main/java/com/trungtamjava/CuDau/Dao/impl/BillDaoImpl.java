@@ -57,4 +57,10 @@ public class BillDaoImpl implements BillDao {
 		return entityManager.createQuery(hql, BillEntity.class).setParameter("buyerId", buyerId).setFirstResult(start).setMaxResults(length).getResultList();
 	}
 
+	@Override
+	public List<BillEntity> getAll() {
+		String hql="select b from BillEntity b";
+		return entityManager.createQuery(hql, BillEntity.class).getResultList();
+	}
+
 }

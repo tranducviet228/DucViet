@@ -12,7 +12,6 @@ import com.trungtamjava.CuDau.Dao.BillDao;
 import com.trungtamjava.CuDau.Dto.BillDto;
 import com.trungtamjava.CuDau.Dto.UserDto;
 import com.trungtamjava.CuDau.Entity.BillEntity;
-import com.trungtamjava.CuDau.Entity.ProductBillEntity;
 import com.trungtamjava.CuDau.Entity.UserEntity;
 import com.trungtamjava.CuDau.Service.BillService;
 import com.trungtamjava.CuDau.Utils.DateTimeUtils;
@@ -39,8 +38,11 @@ public class BillServiceImpl implements BillService {
 		UserEntity userEntity = new UserEntity();
 		userEntity.setId(billDto.getUser().getId());
 		userEntity.setName(billDto.getUser().getName());
+		userEntity.setUsername(billDto.getUser().getUsername());
 		billEntity.setBuyer(userEntity);
+		
 		billDao.add(billEntity);
+		
 		billDto.setId(billEntity.getId());
 	}
 
@@ -126,6 +128,16 @@ public class BillServiceImpl implements BillService {
 		billDto.setUser(userDto);
 		return billDto;
 
+	}
+
+	@Override
+	public List<BillDto> getAll() {
+		List<BillEntity> list= billDao.getAll();
+		List<BillDto> list2 = new ArrayList<BillDto>();
+		for(BillEntity b: list) {
+			list2.add(convertDto(b));
+		}
+		return list2;
 	}
 
 }

@@ -17,6 +17,7 @@ public interface BillService {
 	
 	public List<BillDto> searchby(String name, int start, int length);
 	
+	public List<BillDto> getAll();
 	
 
 }

@@ -20,6 +20,6 @@ public interface UserService {
 	
 	List<UserDto> getAllUser();
 	
-	List<UserDto> search(String name, int start, int length);
+	List<UserDto> search(String findName, int start, int length);
 	
 }

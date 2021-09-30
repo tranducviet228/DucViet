@@ -1,6 +1,5 @@
 package com.trungtamjava.CuDau.Entity;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,17 +15,17 @@ public class ProductBillEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@Column(name = "unit_price")
 	private Long unitPrice;
-	
+
 	@Column(name = "quantity")
 	private Integer quantity;
-	
-	@ManyToOne(cascade = CascadeType.ALL)
+
+	@ManyToOne
 	@JoinColumn(name = "bill_id")
 	private BillEntity bill;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "product_id")
 	private ProductEntity product;
@@ -74,6 +73,5 @@ public class ProductBillEntity {
 	public ProductBillEntity() {
 		super();
 	}
-	
-	
+
 }

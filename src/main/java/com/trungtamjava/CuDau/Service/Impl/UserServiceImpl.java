@@ -116,8 +116,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<UserDto> search(String name, int start, int length) {
-		List<UserEntity> users = userDao.search(name, start, length);
+	public List<UserDto> search(String findName, int start, int length) {
+		List<UserEntity> users = userDao.search(findName, start, length);
 		List<UserDto> userDTOs = new ArrayList<UserDto>();
 		for (UserEntity user : users) {
 			UserDto userDTO = new UserDto();

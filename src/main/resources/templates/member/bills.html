@@ -14,7 +14,6 @@
 	<table border="1px solid black">
 		<tr>
 			<th>ID</th>
-			<th>NAME</th>
 			<th>ADDRESS</th>
 			<th>PHONE</th>
 			<th>BUYDATE</th>
@@ -22,20 +21,21 @@
 			<th>DISCOUNT</th>
 			<th>PRICETOTAL</th>
 			<th>PAY</th>
+			<th>Status</th>
 			<th>OPTION</th>
 		</tr>
 
 		<tr th:each="b:${listB }">
 			<td th:text="${b.id }"></td>
-			<td th:text="${b.user.username}"></td>
 			<td th:text="${b.address}"></td>
 		    <td th:text="${b.phoneNumber}"></td>
 			<td th:text="${b.buyDate }"></td>
 					
 			<td th:text="${b.discountPercent}+'%'"></td>
 			<td th:text="${b.priceTotal }"></td>
-			<td th:text="${b.pay }"></td>		
-			<td><a th:href="@{'/member/bill?billId='+${b.id }}">detail</a>|<a th:href="@{'/member/delete/bills?billId='+${b.id }}">DELETE</a></td>
+			<td th:text="${b.pay }"></td>
+			<td th:text="${b.status }"></td>		
+			<td><a th:href="@{'/member/bill?billId='+${b.id }}">detail</a>|<a th:href="@{'/member/delete/?id='+${b.id }}">HỦY ĐƠN HANG</a></td>
 		</tr>
 
 	</table>

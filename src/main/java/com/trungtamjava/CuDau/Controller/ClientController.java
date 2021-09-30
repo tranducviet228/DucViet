@@ -1,10 +1,12 @@
 package com.trungtamjava.CuDau.Controller;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import javax.servlet.ServletContextAttributeEvent;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -12,16 +14,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.event.PublicInvocationEvent;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.trungtamjava.CuDau.Dto.CategoryDto;
 import com.trungtamjava.CuDau.Dto.ProductBillDto;
 import com.trungtamjava.CuDau.Dto.ProductDto;
+import com.trungtamjava.CuDau.Dto.UserDto;
 import com.trungtamjava.CuDau.Service.CategoryService;
 import com.trungtamjava.CuDau.Service.ProductBillService;
 import com.trungtamjava.CuDau.Service.ProductService;
 import com.trungtamjava.CuDau.Service.UserService;
+import com.trungtamjava.CuDau.Service.Impl.LoginService;
 
 @Controller
 public class ClientController {
@@ -37,8 +43,12 @@ public class ClientController {
 	
 	@Autowired
 	ProductBillService productBillService;
+	
+	@Autowired
+	LoginService loginService;
+	
 	@GetMapping(value = "/index")
-	public String products(HttpServletRequest request) {
+	public String products(HttpServletRequest request, HttpSession session) {
 		String nameCate= request.getParameter("nameCate");
 		String namePro= request.getParameter("namePro");
 //		Integer page=Integer.valueOf(request.getParameter("page"));
@@ -46,6 +56,16 @@ public class ClientController {
 		List<ProductDto> listP= productService.getAllPro();
 		
 		
+		Object object = session.getAttribute("cart");
+		if(object!= null) {
+		Long a=0L;
+		Map<Long, ProductBillDto> map= (Map<Long, ProductBillDto>) object;
+		for(Entry<Long, ProductBillDto> entry: map.entrySet()) {
+			a+= entry.getValue().getQuantity();
+		}
+		
+		session.setAttribute("amount", a);
+		}
 		
 		request.setAttribute("listP", listP);
 		request.setAttribute("listC", listC);
@@ -102,7 +122,7 @@ public class ClientController {
 			
 		}
 	    
-		return "redirect:/cart";
+		return "redirect:/index";
 		
 	}
 	@GetMapping(value = "/cart")
@@ -142,4 +162,46 @@ public class ClientController {
 		request.setAttribute("listPro", listProduct);
 		return "client/listProduct";
 		}
+	
+	@GetMapping(value = "/register")
+    public String register() {
+   	 return"/register";
+    }
+    
+    @PostMapping(value = "/register")
+    public String memRegister(HttpServletRequest request, @ModelAttribute UserDto userDto) {
+
+   	 userService.add(userDto);
+   	 return "redirect:/login";
+    }
+    @GetMapping(value = "/logout")
+    public String logout() {
+		return "/login"
+				;
+   	 
+    }
+    @GetMapping("/login")
+    public String hello() {
+    	return"login";
+    }
+
+	
+	
+	@GetMapping("/access-deny")
+	public String accessDeny(HttpServletRequest req) {
+		return "access-deny";
+	}
+	@GetMapping("/admin/dashboard")
+	public String dashBoard(HttpServletRequest request) {
+		 if (request.isUserInRole("ROLE_ADMIN")) {
+//			 UserPrincipal currentUser = (UserPrincipal) SecurityContextHolder.getContext().getAuthentication();
+//			 UserDto userDto= userService.get(((UserDto) currentUser).getId());
+//			 request.setAttribute("currenUSer", userDto);
+		
+		 
+		 return"/dashboard";}
+		 
+		return null;
+		 
+	}
 }

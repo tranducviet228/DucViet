@@ -17,4 +17,6 @@ public interface BillDao {
      List<BillEntity> search(String name, int start, int length);
      
      List<BillEntity> searchbyBuyer(Long buyerId, int start, int length);
+     
+     List<BillEntity> getAll();
 }

@@ -226,13 +226,16 @@
                                 
                                 
                             </div> <!-- form-row end.// -->
-                        
+                             <div class="form-group">
+                                <input type="text" class="form-control" name="name" placeholder="Name">
+                            </div>
                             <div class="form-group">
                                 <input type="text" class="form-control" name="address" placeholder="Address">
                             </div>
                             <div class="form-group">
                                 <input type="text" class="form-control" name="phoneNumber" placeholder="Phone">
                             </div>
+                              
                            
                             
                                                     
@@ -251,19 +254,7 @@
                 <div class="col-md-4">
                     <div class="tz-shopping-total card">
                         <div class="card-body">
-                            <dl class="dlist-align align-items-end tz-shopping-items">
-                                <dt class="d-flex align-items-center">
-                                    <div class="checkout-product-image-wrap">
-                                        <img src="images/checkout/checkout-headphone.png" alt="">    
-                                    </div>
-                                    <div>
-                                        <h5>Camera Canon EOS</h5>
-                                        <p>Matrix: 25 Mpx</p>
-                                        <p>Brand: Canon</p>
-                                    </div>
-                                </dt>
-                                <dd class="text-right">$568</dd>
-                            </dl>
+                            
                             <dl class="dlist-align">
                                 <dt>Total price:</dt>
                                 <dd class="text-right" th:text="${session.sum}"></dd>

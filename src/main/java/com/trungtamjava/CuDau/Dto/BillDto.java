@@ -1,7 +1,5 @@
 package com.trungtamjava.CuDau.Dto;
 
-import java.util.Date;
-
 public class BillDto {
 	
 	private Long id;

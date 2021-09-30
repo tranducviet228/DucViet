@@ -42,7 +42,6 @@ public class BillEntity {
     private String status;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "bill")
-    @Column(name = "bill_products")
     private List<ProductBillEntity> productBills;
     
     @Column(name = "address")
