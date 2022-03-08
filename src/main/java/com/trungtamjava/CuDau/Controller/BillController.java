@@ -12,12 +12,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.trungtamjava.CuDau.Dto.BillDto;
+import com.trungtamjava.CuDau.Dto.ProductBillDto;
 import com.trungtamjava.CuDau.Service.BillService;
+import com.trungtamjava.CuDau.Service.ProductBillService;
 
 @Controller
 public class BillController {
 	@Autowired
 	BillService billService;
+	
+	@Autowired
+	ProductBillService productBillService;
 	
 	@GetMapping(value = "/admin/bill/search")
 	public String listBill(HttpServletRequest request) {
@@ -44,5 +49,14 @@ public class BillController {
 		request.setAttribute("bill", billDto);
 		return"admin/bill/update-bill";
 	}
-
+	
+	@GetMapping(value = "/admin/bill/billDetail")
+	public String billDe(HttpServletRequest request, @RequestParam(value  = "id") Long id) {
+		List<ProductBillDto> list= productBillService.searchbyIdBill(id, 0, 10);
+		request.setAttribute("billDe", list);
+		BillDto billDto= billService.get(id);
+		request.setAttribute("bill", billDto);
+		
+		return"admin/bill/billDetail";
+	}
 }

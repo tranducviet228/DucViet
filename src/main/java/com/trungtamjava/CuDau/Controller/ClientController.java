@@ -1,16 +1,21 @@
 package com.trungtamjava.CuDau.Controller;
 
 import java.util.HashMap;
+
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import javax.persistence.metamodel.SetAttribute;
 import javax.servlet.ServletContextAttributeEvent;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.event.PublicInvocationEvent;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -23,15 +28,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.trungtamjava.CuDau.Dto.CategoryDto;
+import com.trungtamjava.CuDau.Dto.CommentDto;
 import com.trungtamjava.CuDau.Dto.ProductBillDto;
 import com.trungtamjava.CuDau.Dto.ProductDto;
 import com.trungtamjava.CuDau.Dto.UserDto;
 import com.trungtamjava.CuDau.Dto.UserPrincipal;
+import com.trungtamjava.CuDau.Repository.ProductRepository;
 import com.trungtamjava.CuDau.Service.CategoryService;
+import com.trungtamjava.CuDau.Service.CommentService;
 import com.trungtamjava.CuDau.Service.ProductBillService;
 import com.trungtamjava.CuDau.Service.ProductService;
 import com.trungtamjava.CuDau.Service.UserService;
 import com.trungtamjava.CuDau.Service.Impl.LoginService;
+
+import javassist.expr.NewArray;
 
 @Controller
 public class ClientController {
@@ -51,13 +61,19 @@ public class ClientController {
 	@Autowired
 	LoginService loginService;
 	
+	@Autowired 
+	CommentService commentService;
+	
+	@Autowired
+	ProductRepository productRepository;
+	
 	@GetMapping(value = "/index")
 	public String products(HttpServletRequest request, HttpSession session) {
 		String nameCate= request.getParameter("nameCate");
 		String namePro= request.getParameter("namePro");
 //		Integer page=Integer.valueOf(request.getParameter("page"));
 		List<CategoryDto> listC= categoryService.getAllCate();
-		List<ProductDto> listP= productService.getAllPro();
+		List<ProductDto> listP= productService.findAll();
 		
 		
 		Object object = session.getAttribute("cart");
@@ -79,96 +95,57 @@ public class ClientController {
 	
 	@GetMapping(value = "/product")
 	public String product(HttpServletRequest request, @RequestParam(value  = "id", required = true) Long id) {
-		ProductDto productDto= productService.get(id);
+		ProductDto productDto= productService.getOne(id);		
+		List<CommentDto> list= commentService.searchByPro(id);
+		request.setAttribute("listComment", list);
 		request.setAttribute("p", productDto);
 		return "client/product-details";
 		
 	}
-	@GetMapping(value = "/client/cart")
-	public String addCart(HttpServletRequest request, @RequestParam(value = "pId") Long pId, HttpSession session) {
-		
-		ProductDto productDto= productService.get(pId);
-		Object object= session.getAttribute("cart");
-		if(object == null) {
-			ProductBillDto productBillDto= new ProductBillDto();
-			productBillDto.setProductDto(productDto);
-			productBillDto.setQuantity(1);
-			productBillDto.setUnitPrice(productDto.getPrice());
-			Map<Long, ProductBillDto> map=new HashMap<Long, ProductBillDto>();
-			map.put(pId, productBillDto);
-			session.setAttribute("cart", map);
-		}
-	    else {
-			Map<Long, ProductBillDto> map = (Map<Long, ProductBillDto>) object;
-			ProductBillDto productBillDto= map.get(pId);
-			if(productBillDto == null) {
-				 productBillDto= new ProductBillDto();
-				 productBillDto.setProductDto(productDto);
-				 productBillDto.setQuantity(1);
-				 productBillDto.setUnitPrice(productDto.getPrice());
-				 map.put(pId, productBillDto);
-				 
-			}
-			
-			else {
-				if(productBillDto.getQuantity()<productDto.getAmount()) {
-					productBillDto.setQuantity(productBillDto.getQuantity()+1);
-				}
-				else {
-					productBillDto.setQuantity(productBillDto.getQuantity());
-				}
-			}
-			
-			session.setAttribute("cart", map);
-			
-			
-			
-			
-		}
-	    
-		return "redirect:/index";
-		
-	}
-	@GetMapping(value = "/cart")
-	public String cart(HttpSession session) {
-		Object object2= session.getAttribute("cart");
-		if(object2!=null) {
-		Map<Long, ProductBillDto> map2= (Map<Long, ProductBillDto>) object2;
-		
-		Long sum=(long) 0;
-		for(Entry<Long, ProductBillDto> entry: map2.entrySet()) {
-			sum = sum + entry.getValue().getQuantity()*entry.getValue().getUnitPrice();
-		}
-		session.setAttribute("total", sum);
-		}
-		
-		return"client/cart";
-	}
 	
-	@GetMapping(value = "/delete/cart")
-	public String deleteCart(HttpSession session , @RequestParam(name = "key", required = true) Long key) {
-		Object object=session.getAttribute("cart");
-		Map<Long, ProductBillDto> map= (Map<Long, ProductBillDto>) object;
-		map.remove(key);
-		session.setAttribute("cart", map);
-		return "redirect:/cart";
-		
-	}
-	@GetMapping(value = "/listPro")
-	public String list(HttpServletRequest request, @RequestParam(value = "nameCate", required = true) String nameCate) {
-		List<ProductDto> listP= productService.searchbyNameCate(nameCate, 0, 10);
-		request.setAttribute("listPro", listP);
-		return"client/listProduct";
-	}
+
 	@GetMapping(value = "/searchBypro")
 	public String sPro(HttpServletRequest request, @RequestParam(value = "namePro", required = true) String namePro) {
-		List<ProductDto> listProduct= productService.search(namePro, 0, 10);
+		List<ProductDto> listProduct= productService.searchByPro(namePro, 0, 10);
 		request.setAttribute("listPro", listProduct);
 		return "client/listProduct";
 		}
 	
+	
+	
+//	@GetMapping(value = "/listPro")
+//	public String list(HttpServletRequest request, @RequestParam(value = "nameCate", required = true) String nameCate) {
+//		List<ProductDto> listP= productService.getAllByCate(nameCate);
+//		request.setAttribute("listPro", listP);
+//		return"client/listProduct";
+//	}
+//	
+	
+	@GetMapping(value = "/listPro")
+	public String sPro(HttpServletRequest request, @RequestParam(value = "nameCate", required = true) String nameCate, @RequestParam(value = "page", defaultValue = "0", required = false) int page, @RequestParam(value = "size", defaultValue = "6", required = false) int size) {
+		Pageable pageable= PageRequest.of(page, size);
+		
+		request.setAttribute("pageProduct", productRepository.searchByCate(nameCate, pageable));
+		return "client/listProduct";
+		}
+	
+	@GetMapping(value = "/page")
+	public String s3Pro(Model model, @RequestParam(value   = "nameCate", required = true) String nameCate, @RequestParam(value = "page", defaultValue = "0", required = false) int page, @RequestParam(value = "size", defaultValue = "6", required = false) int size) {
+		Pageable pageable= PageRequest.of(page, size);
+		
+		model.addAttribute("nameCate", nameCate);
+		model.addAttribute("pageProduct", productRepository.getAllIphone(nameCate,pageable));
+		model.addAttribute("currentPage", page);
+		
+		model.addAttribute("totalPage", productRepository.getAllIphone(nameCate, pageable).getTotalPages());
+		return "client/listProduct";
+		}
+	
+	
 	@GetMapping(value = "/register")
-    public String register() {
+    public String register(Model model) {
+		UserDto userDto= new UserDto();
+		model.addAttribute("user",userDto );
    	 return"/register";
     }
     
@@ -185,7 +162,8 @@ public class ClientController {
    	 
     }
     @GetMapping("/login")
-    public String hello() { 
+    public String hello() {
+    	
     	return"login";
     }
 

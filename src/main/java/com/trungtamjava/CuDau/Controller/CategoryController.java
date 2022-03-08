@@ -57,7 +57,7 @@ public class CategoryController {
 	@PostMapping(value = "/admin/category/update")
 	public String updateCate(@ModelAttribute CategoryDto categoryDto) {
 
-		categoryService.update(categoryDto);
+		categoryService.save(categoryDto);
 		return "redirect:/admin/category/list";
 	}
 

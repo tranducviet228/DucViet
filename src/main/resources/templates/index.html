@@ -116,6 +116,7 @@
                                 <div>
                                     <a th:href="@{/login}">Sign in</a>
                                     <a th:href="@{/register}">Register</a>
+                                    <a th:href="@{/member/lists}">My Bill</a>
                                 </div>
                             </div>
                             <a th:href="@{/cart}" class="widget-header pl-3 ml-3">
@@ -151,8 +152,14 @@
                             <a class="nav-link dropdown-toggle"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">All Categories</a>
                             
                             <div class="dropdown-menu"  >
-                                <a class="dropdown-item" th:each="c :${listC}" th:href="@{'/listPro?nameCate=' +${c.name}}" th:text="${c.name}"></a>
+                                <a class="dropdown-item" th:each="c :${listC}" th:href="@{'/page?nameCate=' +${c.name}}" th:text="${c.name}"></a>
                             </div>
+                           
+                             <!-- 
+                             <div class="dropdown-menu"  >
+                                <a class="dropdown-item"  th:href="@{'/page'}" th:text="Iphone"></a>
+                            </div>
+                             -->
                             
                         </li>
                         <li class="nav-item">
@@ -451,7 +458,7 @@
                     <div class="zone-carousel owl-carousel text-center" >
                         <div th:each="c :${listC}">
                         
-                        <a th:href="@{'/listPro?nameCate=' +${c.name}}" class="single-zone d-table align-items-center bg-danger">
+                        <a th:href="@{'/page?nameCate=' +${c.name}}" class="single-zone d-table align-items-center bg-danger">
                             <div>
                                 <h4 class="zone-title" th:text="${c.name}"></h4>
                             </div>

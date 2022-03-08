@@ -27,6 +27,7 @@ public class LoginService implements UserDetailsService{
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		UserEntity userEntity= userDao.getbyName(username);
+		
 		if (userEntity==null) {
 			throw new UsernameNotFoundException("not found");
 		}

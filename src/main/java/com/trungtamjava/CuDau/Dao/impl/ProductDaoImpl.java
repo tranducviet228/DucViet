@@ -1,11 +1,16 @@
 package com.trungtamjava.CuDau.Dao.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 
 import com.trungtamjava.CuDau.Dao.ProductDao;
@@ -27,7 +32,7 @@ public class ProductDaoImpl  implements ProductDao{
 		entityManager.merge(productEntity);
 		
 	}
-
+     
 	@Override
 	public void delete(ProductEntity productEntity) {
 		entityManager.remove(productEntity);
@@ -40,8 +45,6 @@ public class ProductDaoImpl  implements ProductDao{
 		return entityManager.find(ProductEntity.class, id);
 	}
 
-
-
 	@Override
 	public List<ProductEntity> getAllPro() {
 		String hql= " select p from ProductEntity p ";
@@ -51,7 +54,7 @@ public class ProductDaoImpl  implements ProductDao{
 
 	@Override
 	public List<ProductEntity> searchbyNameCate(String nameCate, int start, int length) {
-		String hql= "select p from ProductEntity p join CategoryEntity c on c.id=p.categoryEntity.id where c.name like :nameCate ";
+		String hql= "select p from ProductEntity p join CategoryEntity c on c.id=p.categoryEntity.id where c.name like :nameCate";
 		return entityManager.createQuery(hql, ProductEntity.class).setParameter("nameCate", "%" + nameCate + "%").setFirstResult(start).setMaxResults(length).getResultList();
 	}
 
@@ -61,4 +64,8 @@ public class ProductDaoImpl  implements ProductDao{
 		return entityManager.createQuery(hql, ProductEntity.class).setParameter("nameP","%" + namePro + "%").setFirstResult(start).setMaxResults(length).getResultList();
 	}
 
+	
+
+
+	
 }

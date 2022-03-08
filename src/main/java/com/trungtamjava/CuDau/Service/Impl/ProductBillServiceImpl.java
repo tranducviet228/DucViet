@@ -15,6 +15,7 @@ import com.trungtamjava.CuDau.Dto.ProductDto;
 import com.trungtamjava.CuDau.Entity.BillEntity;
 import com.trungtamjava.CuDau.Entity.ProductBillEntity;
 import com.trungtamjava.CuDau.Entity.ProductEntity;
+import com.trungtamjava.CuDau.Repository.ProductBillRepository;
 import com.trungtamjava.CuDau.Service.ProductBillService;
 
 @Transactional
@@ -26,6 +27,9 @@ public class ProductBillServiceImpl implements ProductBillService {
 
 	@Autowired
 	ProductDao productDao;
+	
+	@Autowired
+	ProductBillRepository productBillRepository;
 
 	@Override
 	public void add(ProductBillDto productBillDto) {
@@ -82,11 +86,29 @@ public class ProductBillServiceImpl implements ProductBillService {
 
 	@Override
 	public ProductBillDto get(Long id) {
-		ProductBillEntity productBillEntity = productBillDao.getbyId(id);
-		ProductBillDto productBillDto = new ProductBillDto();
-		productBillDto = convert(productBillEntity);
+//		ProductBillEntity productBillEntity = productBillDao.getbyId(id);
+		ProductBillEntity productBillEntity= productBillRepository.getOneById(id);
+		if (productBillEntity!= null) {
+			ProductBillDto productBillDto = new ProductBillDto();
+			productBillDto.setId(productBillEntity.getId());
+			productBillDto.setQuantity(productBillEntity.getQuantity());
+			productBillDto.setUnitPrice(productBillEntity.getUnitPrice());
 
-		return productBillDto;
+			ProductDto productDto = new ProductDto();
+			productDto.setId(productBillEntity.getProduct().getId());
+			productDto.setName(productBillEntity.getProduct().getName());
+			productDto.setImage(productBillEntity.getProduct().getImage());
+			productDto.setPrice(productBillEntity.getProduct().getPrice());
+			productBillDto.setProductDto(productDto);
+
+			BillDto billDto = new BillDto();
+			billDto.setId(productBillEntity.getBill().getId());
+			productBillDto.setBillDto(billDto);
+			return productBillDto;
+		}
+
+
+		return null;
 	}
 
 	@Override

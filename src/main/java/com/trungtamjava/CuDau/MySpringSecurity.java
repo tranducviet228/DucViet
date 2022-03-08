@@ -2,6 +2,7 @@ package com.trungtamjava.CuDau;
 
 import javax.servlet.http.HttpServletRequest;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.context.annotation.Configuration;
@@ -59,10 +60,10 @@ public class MySpringSecurity extends WebSecurityConfigurerAdapter{
 		String rawPass = "123456";
 		String encode = new BCryptPasswordEncoder().encode(rawPass);
 		System.out.println(encode);
-		//
-		boolean check = new BCryptPasswordEncoder().matches(rawPass, encode);
-		
-		System.out.println(check);
+//		//
+//		boolean check = new BCryptPasswordEncoder().matches(rawPass, encode);
+//		
+//		System.out.println(check);
 	
 	}
 	

@@ -35,7 +35,7 @@
 			<td th:text="${b.priceTotal }"></td>
 			<td th:text="${b.pay }"></td>
 			<td th:text="${b.status }"></td>		
-			<td><a th:href="@{'/member/bill?billId='+${b.id }}">detail</a>|<a th:href="@{'/member/delete/?id='+${b.id }}">HỦY ĐƠN HANG</a></td>
+			<td><a th:href="@{'/member/billDetail?id='+${b.id }}">Detail</a>|<a th:href="@{'/member/delete/?id='+${b.id }}">HỦY ĐƠN HÀNG</a></td>
 		</tr>
 
 	</table>

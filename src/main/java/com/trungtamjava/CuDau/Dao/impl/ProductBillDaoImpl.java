@@ -49,7 +49,7 @@ public class ProductBillDaoImpl implements ProductBillDao {
 
 	@Override
 	public List<ProductBillEntity> searchByIdbill(Long id, int start, int length) {
-		String hql = " select ProductBillEntity p join p.bill c where c.id = idBill";
+		String hql = " select p from ProductBillEntity p join p.bill c where c.id = :idBill";
 		return entityManager.createQuery(hql, ProductBillEntity.class).setParameter("idBill", id).setFirstResult(start).setMaxResults(length).getResultList();
 	}
 

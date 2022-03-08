@@ -197,7 +197,9 @@
                                 </tr>
                             </thead>
                             <tbody>
+                            
                                 <tr th:each="entry: ${session.cart}">
+                                <form th:action="@{'/update/cart' }" method="get">
                                     <td>
                                         <figure class="itemside">
                                             <div class="aside"><img th:src="@{'/download?image=' +${entry.value.productDto.image}}" class="img-sm"></div>
@@ -208,7 +210,13 @@
                                         </figure>
                                     </td>
                                     <td>
-                                        <div class="quantity" th:text="${entry.value.quantity}"></div>
+                                    <div>
+                                    <input type="hidden" th:value="${entry.key}" name="id"/>
+                                    </div>
+                                        
+                                        <div class="quantity">
+				                        <input type="text"  th:value="${entry.value.quantity}" name="quantity" /> 
+			                            </div>
                                     </td>
                                     <td>
                                         <div class="price-wrap">
@@ -218,7 +226,16 @@
                                     <td class="text-right">
                                         
                                         <a th:href="@{'/delete/cart?key='  +${entry.key}}" class="btn btn-danger"> Remove</a>
+                                        <div>
+				                             
+			                          </div>
                                     </td>
+                                      <td>
+                                        <div class="text-right">
+                                             <button type="submit">Update</button>
+                                        </div> 
+                                    </td>
+                                  </form>
                                 </tr>
                                 
                             </tbody>

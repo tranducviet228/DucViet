@@ -9,9 +9,12 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.trungtamjava.CuDau.Controller.CategoryController;
+import com.trungtamjava.CuDau.Converter.CategoryConverter;
 import com.trungtamjava.CuDau.Dao.CategoryDao;
 import com.trungtamjava.CuDau.Dto.CategoryDto;
 import com.trungtamjava.CuDau.Entity.CategoryEntity;
+import com.trungtamjava.CuDau.Repository.CategoryRepository;
 import com.trungtamjava.CuDau.Service.CategoryService;
 
 @Transactional
@@ -23,28 +26,51 @@ public class CategoryServiceImpl  implements CategoryService{
 	@Autowired
 	CategoryDao categoryDao;
 	
-	CategoryEntity categoryEntity;
+	@Autowired
+	CategoryConverter categoryConverter;
+	
+	@Autowired
+	CategoryRepository categoryRepository;
 	
 	@Override
-	public void add(CategoryDto categoryDto) {
-		CategoryEntity categoryEntity= new CategoryEntity();
-		categoryEntity.setId(categoryDto.getId());
+	public CategoryDto save(CategoryDto categoryDto) {
+		
+		CategoryEntity categoryEntity= categoryRepository.getOne(categoryDto.getId());
+		if(categoryEntity!= null) {
 		categoryEntity.setName(categoryDto.getName());
-		categoryDao.add(categoryEntity);
+		categoryEntity=categoryRepository.save(categoryEntity);
+		}
+		else if(categoryEntity==null) {
+			  categoryEntity= new CategoryEntity();
+			 categoryEntity.setId(categoryDto.getId());
+			 categoryEntity.setName(categoryDto.getName());
+			 
+		}
+		categoryEntity=categoryRepository.save(categoryEntity);
+		return categoryConverter.toDto(categoryEntity);
 		
 	}
 
 	@Override
-	public void update(CategoryDto categoryDto) {
-		CategoryEntity categoryEntity = categoryDao.getCategory(categoryDto.getId());
-		
-		if(categoryEntity != null) {
-			categoryEntity.setName(categoryDto.getName());
-		//	categoryEntity.setId(categoryDto.getId());
-			categoryDao.update(categoryEntity);
-		}
-		
+	public CategoryDto add(CategoryDto categoryDto) {
+		CategoryEntity categoryEntity= new CategoryEntity();
+		categoryEntity.setId(categoryDto.getId());
+		categoryEntity.setName(categoryDto.getName());
+		categoryEntity=categoryRepository.save(categoryEntity);
+		return categoryConverter.toDto(categoryEntity);
 	}
+
+//	@Override
+//	public CategoryDto update(CategoryDto categoryDto) {
+//		CategoryEntity categoryEntity = categoryDao.getCategory(categoryDto.getId());
+//		
+//		if(categoryEntity != null) {
+//			categoryEntity.setName(categoryDto.getName());
+//		//	categoryEntity.setId(categoryDto.getId());
+//			return categoryRepository.save(categoryEntity);
+//		}
+//		
+	
 
 	@Override
 	public void delete(CategoryDto categoryDto) {
@@ -57,7 +83,7 @@ public class CategoryServiceImpl  implements CategoryService{
 
 	@Override
 	public CategoryDto getCate(Long id) {
-		CategoryEntity categoryEntity= categoryDao.getCategory(id);
+		CategoryEntity categoryEntity= categoryRepository.getOne(id);
 		CategoryDto categoryDto=new CategoryDto();
 		categoryDto.setId(categoryEntity.getId());
 		categoryDto.setName(categoryEntity.getName());
@@ -84,7 +110,7 @@ public class CategoryServiceImpl  implements CategoryService{
 	public List<CategoryDto> search(String findname, int start, int length) {
 		List<CategoryEntity> list= categoryDao.search(findname, start, length);
 		List<CategoryDto> list2= new ArrayList<CategoryDto>();
-		
+		CategoryEntity categoryEntity= new CategoryEntity();
 		for(CategoryEntity c: list) {
 			CategoryDto categoryDto= new CategoryDto();
 			categoryDto.setId(categoryEntity.getId());
@@ -93,6 +119,7 @@ public class CategoryServiceImpl  implements CategoryService{
 		}
 		return list2;
 	}
+
 	
 	
 

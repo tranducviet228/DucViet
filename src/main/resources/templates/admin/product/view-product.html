@@ -189,7 +189,9 @@
 							</div>
 						</div>
 					</form>
-
+                       <div class="text-center">
+                                        <a class="small" th:href="@{/logout}">Logout</a>
+                                    </div>
 					<!-- Topbar Navbar -->
 					<ul class="navbar-nav ml-auto">
 
@@ -369,12 +371,46 @@
 					<h1 class="h3 mb-2 text-gray-800">Tables</h1>
 					<a th:href="@{/admin/product/add}" class="btn btn-primary"
 						role="button" data-bs-toggle="button">Add New</a>
+						
+						
+			<form class="form-inline" id="searchForm" name="searchObject" method="get" th:action="@{/admin/product/list}">
+			<!--  
+			<div class="form-group">
+				<select class="form-control" name="category" id="category">
+					
+						<option th:each="c :${c}" th:value="${c.id}" th:text="${c.name}"></option>
+					
+				</select>
+			</div>
+			-->
+            <!-- 
+			<div class="form-group">
+				<select class="form-control" name="donGia" id="price">
+					<option value="">Tất cả giá</option>
+					<option value="duoi-2-trieu">Dưới 2 triệu</option>
+					<option value="2-trieu-den-4-trieu">2 triệu đến 4 triệu</option>
+					<option value="4-trieu-den-6-trieu">4 triệu - 6 triệu</option>
+					<option value="6-trieu-den-10-trieu">6 triệu - 10 triệu</option>
+					<option value="tren-10-trieu">Trên 10 triệu</option>
+				</select>
+			</div>
+             -->
+			<div class="form-group">
+				<select class="form-control" name="sort">
+					<option value="asc">Sắp xếp theo giá tăng dần</option>
+					<option value="desc">Sắp xếp theo giá giảm dần</option>
+				</select>
+			</div>
+
+			&nbsp;&nbsp;
+			<button type="submit" class="btn btn-primary" id="btnDuyetSanPham">Duyệt
+				sản phẩm</button>
+		</form>
 
 					<!-- DataTales Example -->
 					<div class="card shadow mb-4">
 						<div class="card-header py-3">
-							<h6 class="m-0 font-weight-bold text-primary">DataTables
-								Example</h6>
+							<h6 class="m-0 font-weight-bold text-primary" style= "font-size: 30px">DANH SÁCH SẢN PHẨM</h6>
 						</div>
 						<div class="card-body">
 							<div class="table-responsive">
@@ -395,7 +431,7 @@
 									</thead>
 
 									<tbody>
-										<tr th:each="p :${listP}">
+										<tr th:each="p :${listPro}">
 											<td th:text="${p.id}"></td>
 											<td th:text="${p.name}"></td>
 											<td><img th:src="@{'/download?image='+${p.image}}"
@@ -403,7 +439,7 @@
 											<td th:text="${p.price}"></td>
 											<td th:text="${p.amount}"></td>
 											<td th:text="${p.description}"></td>
-											<td th:text="${p.categoryDto.name}"></td>
+											<td th:text="${p.categoryEntity.name}"></td>
 
 											<td><a th:href="@{'/admin/product/update?id='+${p.id}}">Edit</a>
 												| <a th:href="@{'/admin/product/delete?id='+${p.id}}">Delete</a>
@@ -413,13 +449,24 @@
 
 									</tbody>
 								</table>
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+    
+    <li class="page-item"><a class="page-link" th:href="@{/admin/product/list?page=0}">First</a></li>
+    <li class="page-item"><a class="page-link" th:if="${currentPage > 0}" th:href="@{'/admin/product/list?page=' +${currentPage - 1}}">Previous</a></li>
+    <li class="page-item"><a class="page-link" th:if="${currentPage < lastPage-1}" th:href="@{'/admin/product/list?page=' +${currentPage + 1}}">Next</a></li>
+    <li class="page-item"><a class="page-link" th:href="@{'/admin/product/list?page=' +${lastPage-1}}">Last</a></li>
+   
+   <li class="page-item"> <a class="page-link" th:text="'Page:'+${currentPage}"></a></li>
+  </ul>
+</nav>
 							</div>
 						</div>
 					</div>
 
 				</div>
 				<!-- /.container-fluid -->
-
+            
 			</div>
 			<!-- End of Main Content -->
 

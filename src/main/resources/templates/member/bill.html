@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html >
+<head>
+<meta charset="UTF-8" />
+<title>Bill Detail</title>
+</head>
+<body >
+	<br><br><br><br>
+	<h1>Chi tiet Bill</h1>
+	<table border="1px solid black">
+		<tr>
+			<th>ID</th>
+			<th>TEN_SP</th>
+			<th>GIA_SP</th>
+			<th>SOLUONG</th>
+			<th>THANH TIEN</th>
+			<th>OPTION</th>
+		</tr>
+
+		<tr th:each="bp:${bills}">
+			<td th:text="${bp.id }"></td>
+			<td th:text="${bp.productDto.name }"></td>
+			<td th:text="${bp.unitPrice }"></td>
+			<td th:text="${bp.quantity }"></td>
+			<td th:text="${bp.unitPrice*bp.quantity }"></td>
+			<td><a th:href="@{'/member/delete/bill?id='+${bp.id }}">DELETE</a></td>			
+		</tr>
+
+	</table>
+	<br><br><br>
+	
+	
+</body>
+</html>

@@ -1,15 +1,26 @@
 package com.trungtamjava.CuDau.Entity;
 
 
+import java.io.Serializable;
+
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "user")
-public class UserEntity {
+public class UserEntity implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -31,6 +42,17 @@ public class UserEntity {
 	private String phone;
 	
 	private String email;
+
+	@OneToMany(mappedBy = "userEntity",cascade = CascadeType.ALL)
+	private List<CommentEntity> comments;
+	
+	public List<CommentEntity> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<CommentEntity> comments) {
+		this.comments = comments;
+	}
 
 	public Long getId() {
 		return id;

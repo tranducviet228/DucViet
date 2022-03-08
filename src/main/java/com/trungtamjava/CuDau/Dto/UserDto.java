@@ -1,18 +1,31 @@
 package com.trungtamjava.CuDau.Dto;
 
-
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 public class UserDto {
 	private Long id;
 	private String age;
 	private String name;
+	@NotEmpty(message = "Thiếu username")
 	private String username;
+	@NotEmpty(message = "Thiếu password")
+    @Min(value = 6, message = "Password phải từ 6 kí tự trở lên")
 	private String password;
 	private String role;
 	private String address;
 	private String gender;
+	@NotEmpty(message = "Thiếu số điện thoại")
+	@Size(max = 12)
 	private String phone;
+	@Email(message = "Email không hợp lệ")
 	private String email;
+	
+	
+	
+
 	public Long getId() {
 		return id;
 	}

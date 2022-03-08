@@ -3,6 +3,9 @@ package com.trungtamjava.CuDau.Entity;
 
 
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -10,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 @Entity
 @Table(name = "product")
@@ -31,6 +35,17 @@ public class ProductEntity {
 	@JoinColumn(name = "category_id")
 	private CategoryEntity categoryEntity;
 	
+	@OneToMany(mappedBy = "productEntity", cascade = CascadeType.ALL)
+	private List<CommentEntity> comments;
+	
+	
+	
+	public List<CommentEntity> getComments() {
+		return comments;
+	}
+	public void setComments(List<CommentEntity> comments) {
+		this.comments = comments;
+	}
 	public Long getId() {
 		return id;
 	}

@@ -7,9 +7,9 @@ import com.trungtamjava.CuDau.Dto.CategoryDto;
 
 public interface CategoryService {
       
-	public void add(CategoryDto categoryDto);
+	public CategoryDto save(CategoryDto categoryDto);
 	
-	public void update(CategoryDto categoryDto);
+	public CategoryDto add(CategoryDto categoryDto);
 	
 	public void delete(CategoryDto categoryDto);
 	

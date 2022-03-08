@@ -1,35 +1,33 @@
-body {
-    background: #eee
+.post-comments {
+  padding-bottom: 9px;
+  margin: 5px 0 5px;
 }
 
-.date {
-    font-size: 11px
+.comments-nav {
+  border-bottom: 1px solid #eee;
+  margin-bottom: 5px;
 }
 
-.comment-text {
-    font-size: 12px
+.post-comments .comment-meta {
+  border-bottom: 1px solid #eee;
+  margin-bottom: 5px;
 }
 
-.fs-12 {
-    font-size: 12px
+.post-comments .media {
+  border-left: 1px dotted #000;
+  border-bottom: 1px dotted #000;
+  margin-bottom: 5px;
+  padding-left: 10px;
 }
 
-.shadow-none {
-    box-shadow: none
+.post-comments .media-heading {
+  font-size: 12px;
+  color: grey;
 }
 
-.name {
-    color: #007bff
-}
-
-.cursor:hover {
-    color: blue
-}
-
-.cursor {
-    cursor: pointer
-}
-
-.textarea {
-    resize: none
+.post-comments .comment-meta a {
+  font-size: 12px;
+  color: grey;
+  font-weight: bolder;
+  margin-right: 5px;
 }
